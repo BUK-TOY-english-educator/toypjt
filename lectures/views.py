@@ -21,3 +21,6 @@ def dashboard(request):
 
 def save(request):
     pass
+
+def mok(request):
+    pass
