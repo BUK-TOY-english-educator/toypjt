@@ -4,7 +4,7 @@ from . import views
 app_name = 'lectures'
 
 urlpatterns = [
-    # url
+    # url 수정수정
     # http://{site_url}/lectures/{path 주소}
     path('', views.index),
     path('loading/', views.loading),
