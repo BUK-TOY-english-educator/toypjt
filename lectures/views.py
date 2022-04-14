@@ -24,3 +24,6 @@ def save(request):
 
 def hyun(request):
     pass
+
+def mok(request):
+    pass
