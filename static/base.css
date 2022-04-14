@@ -111,3 +111,7 @@ ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
 }
+
+.bg-theme {
+  background-color: #3C4664!important;
+}
