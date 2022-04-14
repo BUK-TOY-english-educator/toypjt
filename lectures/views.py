@@ -22,5 +22,3 @@ def dashboard(request):
 def save(request):
     pass
 
-def wook(request):
-    pass
