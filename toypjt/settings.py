@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # app
     'lectures',
+    'accounts',
     # library
     'bootstrap5',
     'django_extensions',
@@ -138,3 +139,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Media 경로
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+# Custom User Model
+AUTH_USER_MODEL = 'accounts.User'
