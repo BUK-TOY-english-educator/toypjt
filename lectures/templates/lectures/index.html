@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% block style %}
+<style>
+  .prev-btn {
+    background: 0;
+    border: 0;
+  }
+</style>
+{% endblock style %}
+{% block title %}INDEX{% endblock title %}
+
+{% block content %}
+<h1>어쩌고 저쩌고 영어 어쩌고</h1>
+<input type="text">
+<input type="submit" value="시작">
+
+<p>현재 많은 사람들이 공부하고 있는 영상</p>
+
+{% comment %} 캐러샐 {% endcomment %}
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-around">
+          <div class="card" style="width: 18rem;">
+            <img src="http://www.city.kr/files/attach/images/161/947/583/027/cc2c7a5335d2314bf85032e3c70b8ac8.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img src="http://www.city.kr/files/attach/images/161/947/583/027/cc2c7a5335d2314bf85032e3c70b8ac8.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img src="http://www.city.kr/files/attach/images/161/947/583/027/cc2c7a5335d2314bf85032e3c70b8ac8.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+  </div>
+    <button class="carousel-control-prev prev-btn" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      {% comment %} <span class="visually-hidden">Prev</span> {% endcomment %}
+    </button>
+    <button class="carousel-control-next prev-btn" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      {% comment %} <span class="visually-hidden"></span> {% endcomment %}
+    </button>
+</div>
+
+{% comment %} 도움말 modal {% endcomment %}
+{% comment %} 물음표 버튼 {% endcomment %}
+{% endblock content %}
