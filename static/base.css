@@ -38,14 +38,25 @@
 */
  @font-face {
   /* font-family: 'LeferiPoint-WhiteObliqueA'; */
-  font-family: 'theme-font';
+  font-family: 'LeferiPoint';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   unicode-range: U+AC00-D7A3;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+/* open-sans-regular - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/open-sans-v28-latin-regular.woff') format('woff');
+}
+
+
+body {
+  font-family: 'Open Sans', 'LeferiPoint';
+}
 
 .nav-button {
   border: 0;
@@ -74,14 +85,6 @@
   font-size:24px;
 }
 
-
-
-body {
-  /* font-family: LeferiPoint-WhiteObliqueA; */
-  font-family: 'Open Sans', sans-serif;
-  /* font-family: theme-font; */
-
-}
 
 
 /* nav_bar */
@@ -129,8 +132,6 @@ a[data-toggle="collapse"] {
 
 
 body {
-    /* font-family: 'Poppins', sans-serif; */
-    /* font-family: LeferiPoint-WhiteObliqueA; */
     background: #F9F9F9;
 }
 

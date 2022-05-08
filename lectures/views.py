@@ -7,7 +7,7 @@ def index(request):
 
 
 def loading(request):
-    pass
+    return render(request, 'lectures/loading.html')
 
 
 def study(request):
