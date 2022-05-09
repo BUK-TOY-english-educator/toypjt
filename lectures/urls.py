@@ -6,8 +6,10 @@ app_name = 'lectures'
 urlpatterns = [
     # url 수정수정
     # http://{site_url}/lectures/{path 주소}
-    path('loading/', views.loading, name='loading'),
-    path('<int:video_pk>/study/', views.study, name='study'),
-    path('<int:video_pk>/writing/', views.writing, name='writing'),
-    path('<int:video_pk>/speaking/', views.speaking, name='speaking'),
+    path('', views.index),
+    path('loading/', views.loading),
+    path('youtube/', views.youtube),
+    path('<int:video_pk>/study/', views.study),
+    path('<int:video_pk>/writing/', views.writing),
+    path('<int:video_pk>/speaking/', views.speaking),
 ]
