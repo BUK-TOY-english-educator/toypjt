@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block style %}
+  <style>
+    .top-caption-p {
+      color: blue;
+      font-weight: bold;      
+    }
+    .text-size-level-1 {
+      font-size: 1.1em;            
+    }
+    .text-size-level-2 {
+      font-size: 1.3em;            
+    }
+    .text-size-level-3 {
+      font-size: 1.5em;            
+    }
+    .text-size-level-4 {
+      font-size: 1.7em;            
+    }
+    .font-btn {      
+      color: #fff;      
+      background-color: #F3CAC8;
+      cursor: pointer;
+      border-radius: 10px;
+      font-size: 20px;
+      padding: 5px 15px;      
+    }    
+  </style>
+{% endblock style %}
+{% block content %}
+<h1>유튜브 페이지 입니다</h1>
+<h3 id="time_min"></h3><h3 id="time_sec"></h3>
+<body>  
+  <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+  <div id="player"></div>
+  <div class="mb-3">
+    <button id="bigger-text" class="font-btn">글씨 키우기</button> <button id="smaller-text" class="font-btn">글씨 줄이기</button>
+  </div>
+  <p id="display_caption_0" class="top-caption-p">{{text_lst.3}}</p>
+  <p id="display_caption_1">{{text_lst.2}}</p>
+  <p id="display_caption_2">{{text_lst.1}}</p>
+  <p id="display_caption_3">{{text_lst.0}}</p>  
+  <script>
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    let display_time_min = document.getElementById('time_min');
+    let display_time_sec = document.getElementById('time_sec');
+    let displayCaption0 = document.getElementById("display_caption_0")
+    let displayCaption1 = document.getElementById("display_caption_1")
+    let displayCaption2 = document.getElementById("display_caption_2")
+    let displayCaption3 = document.getElementById("display_caption_3")
+    // 글자버튼
+    let biggerTextBtn = document.getElementById("bigger-text")
+    let smallerTextBtn = document.getElementById("smaller-text")
+    let textSizeLevel = 1 // 초기화
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '360',
+        width: '640',        
+        videoId: "{{ video_id }}",
+        events: {
+          'onReady': onPlayerReady,          
+        }
+      });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    //이분에 시간업데이트와 자막업데이트 같이 넣어야할 것 같음
+    function onPlayerReady(event) {
+      event.target.playVideo();
+      let captionIdx = 1;
+      const textLst = {{text_lst|safe}}
+      const timeLst = {{time_lst|safe}}
+      function updateTime() {        
+        if(player && player.getCurrentTime) {
+          // console.log(captionIdx)    
+          // console.log("{{ text_lst.captionIdx}}")
+          // console.log(player.getCurrentTime())
+          const nowTime = player.getCurrentTime()      
+          console.log(nowTime)
+          if (nowTime > timeLst[captionIdx]){
+            while (nowTime > timeLst[captionIdx]){            
+              captionIdx++;
+            }
+          } else {
+            while (nowTime < timeLst[captionIdx-1]){            
+              captionIdx--;
+            }
+          }
+          console.log(textLst[captionIdx-1]);
+          // console.log(captionIdx)
+          let mins = Math.floor(player.getCurrentTime()/60);
+          let secs = Math.floor(player.getCurrentTime()%60);
+
+          display_time_sec.innerHTML = `${mins}:${secs}`;          
+          displayCaption0.innerText = textLst[captionIdx-1].replace(/\n/g,' '); 
+          displayCaption1.innerText = textLst[captionIdx-2].replace(/\n/g,' ');
+          displayCaption2.innerText = textLst[captionIdx-3].replace(/\n/g,' ');
+          displayCaption3.innerText = textLst[captionIdx-4].replace(/\n/g,' ');         
+        }        
+      }
+      timeupdater = setInterval(updateTime, 100);
+    }    
+
+    // change font size
+    // bigger
+    biggerTextBtn.addEventListener("click", e=>{
+      if (textSizeLevel===4){
+        textSizeLevel = 1;
+      } else {
+        textSizeLevel ++;
+      }
+      const TextSize = 'text-size-level-' + textSizeLevel;
+      const TopTextSize = 'top-caption-p ' + TextSize;
+      console.log(TopTextSize)
+      displayCaption0.setAttribute('class', TopTextSize);
+      displayCaption1.setAttribute('class', TextSize);
+      displayCaption2.setAttribute('class', TextSize);
+      displayCaption3.setAttribute('class', TextSize);
+    })
+    // smaller
+    smallerTextBtn.addEventListener("click", e=>{
+      if (textSizeLevel===1){
+        textSizeLevel = 4;
+      } else {
+        textSizeLevel --;
+      }
+      const TextSize = 'text-size-level-' + textSizeLevel;
+      const TopTextSize = 'top-caption-p ' + TextSize;
+      console.log(TopTextSize)
+      displayCaption0.setAttribute('class', TopTextSize);
+      displayCaption1.setAttribute('class', TextSize);
+      displayCaption2.setAttribute('class', TextSize);
+      displayCaption3.setAttribute('class', TextSize);
+    })
+
+    
+    
+  </script>
+</body>
+{% endblock content %}

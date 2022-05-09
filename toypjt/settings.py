@@ -142,3 +142,5 @@ MEDIA_URL = '/media/'
 
 # Custom User Model
 AUTH_USER_MODEL = 'accounts.User'
+
+YOUTUBE_API_KEY = 'AIzaSyB3ZF5FHJrwRiE5R-zzHI6vlSMmpCVa3Vc'
