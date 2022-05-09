@@ -18,8 +18,8 @@ def writing(request):
     pass
 
 
-def speaking(request):
-    pass
+def speaking(request, video_pk):
+    return render(request, 'lectures/speaking.html')
 
 
 def dashboard(request):

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>SPEAKING</h1>
+  
+  <div class="d-flex flex-column">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiMKb4-UNYgBBqhsiM5YjFb8h_cTIveDAL1bSkeBe_oynpBUCr3w6yGy2ctXUogOariU0&usqp=CAU" alt="">
+    <audio controls id="audio-ctrl">녹음</audio>
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-primary">정지</button>
+      <button id="record-btn">녹음 버튼</button>
+    </div>
+  </div>
+{% endblock content %}
+{% block javascript %}
+<script>
+  const audioCtrl = document.querySelector('#audio-ctrl')
+  const recordBtn = document.querySelector('#record-btn')
+
+  let isRecording = false;
+  let mediaRecorder = null;
+
+  const audioArray = [];
+
+  recordBtn.addEventListener("click", async function (event) {
+    if(!isRecording){
+      const mediaStream = await navigator.mediaDevices.getUserMedia({audio: true})
+
+      mediaRecorder = new MediaRecorder(mediaStream)
+      mediaRecorder.ondataavailable = event => {
+        audioArray.push(event.data);
+      }
+
+      mediaRecorder.onstop = event => {
+        const blob = new Blob(audioArray, {"type": "audio/ogg codecs=opus"})
+        audioArray.splice(0)
+
+        const blobURL = window.URL.createObjectURL(blob)
+
+        audioCtrl.src = blobURL;
+        audioCtrl.play();
+        console.log(audioCtrl)        
+      }
+      mediaRecorder.start();
+      isRecording = true;
+    } else {
+      mediaRecorder.stop();
+      isRecording = false;
+    }
+  })
+</script>
+{% endblock javascript %}

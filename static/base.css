@@ -32,6 +32,11 @@
   color: #AAAAAA;
 }
 
+.theme-btn {
+  background-color:#EAA0A2;
+  width:200px;
+}
+
 /* 테마 글꼴
 한글 : 레페리 포인트 
 영어 : Open Sans
