@@ -1,13 +1,93 @@
-/* 
-레페리 포인트
-https://noonnu.cc/font_page/823
- */
+/* 테마 배경 컬러 */
+.bg-theme1 {
+  background-color: #3A4664;
+}
+.bg-theme2 {
+  background-color: #EAA0A2;
+}
+.bg-theme3 {
+  background-color: #ffDBDC;
+}
+.bg-theme4 {
+  background-color: #ffffff;
+}
+.bg-theme5 {
+  background-color: #AAAAAA;
+}
+
+/* 테마 텍스트 컬러 */
+.text-theme1 {
+  color:#3A4664;
+}
+.text-theme2 {
+  color: #EAA0A2;
+}
+.text-theme3 {
+  color: #ffDBDC;
+}
+.text-theme4 {
+  color: #ffffff;
+}
+.text-theme5 {
+  color: #AAAAAA;
+}
+
+/* 테마 글꼴
+한글 : 레페리 포인트 
+영어 : Open Sans
+*/
  @font-face {
-  font-family: 'LeferiPoint-WhiteObliqueA';
+  /* font-family: 'LeferiPoint-WhiteObliqueA'; */
+  font-family: 'LeferiPoint';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  unicode-range: U+AC00-D7A3;
 }
+
+/* open-sans-regular - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/open-sans-v28-latin-regular.woff') format('woff');
+}
+
+
+body {
+  font-family: 'Open Sans', 'LeferiPoint';
+}
+
+.nav-button {
+  border: 0;
+  background: none;
+  outline: 0!important;
+  cursor: pointer;
+}
+
+.nav-bar {
+  padding-left: 0;
+}
+
+.user-info {
+  padding-left: 15px;
+  padding-top: 20px;
+}
+
+.user-img {
+  width:50px;
+  height:50px;
+  border-radius:25px;
+}
+
+.user-name {
+  margin-top:20px;
+  font-size:24px;
+}
+
+
+
+/* nav_bar */
 
 .wrapper {
   display: flex;
@@ -15,14 +95,15 @@ https://noonnu.cc/font_page/823
 }
 
 #sidebar {
-  min-width: 250px;
-  max-width: 250px;
+  margin-left: -300px;
+  min-width: 300px;
+  max-width: 300px;
   min-height: 100vh;
 }
 
 
 #sidebar.active {
-  margin-left: -250px;
+  margin-left: 0px;
 }
 
 a[data-toggle="collapse"] {
@@ -51,8 +132,6 @@ a[data-toggle="collapse"] {
 
 
 body {
-    /* font-family: 'Poppins', sans-serif; */
-    font-family: LeferiPoint-WhiteObliqueA;
     background: #F9F9F9;
 }
 
@@ -93,25 +172,27 @@ a, a:hover, a:focus {
     padding: 10px;
 }
 
+
 #sidebar ul li a {
     padding: 10px;
     font-size: 1.1em;
     display: block;
+    border-radius:5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 #sidebar ul li a:hover {
-    color: #0000;
-    background: #fff;
+    color: #FFF;
+    background: #F3CAC8;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #000;
+    color: #FFF;
     background: #F3CAC8;
 }
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-}
-
-.bg-theme {
-  background-color: #3C4664!important;
 }
