@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h4>현재 공부 중인 영상 제목</h4>
+<div class="mt-4" style="width: 100%;">
+  <form action="{% url 'lectures:writing' video_pk %}" method="POST" class="">
+    {% csrf_token %}
+    {{ essay_form.media }}
+    {{ essay_form.content }}
+    <input type="submit" value="에세이 저장" class=btn>
+  </form>
+</div>
+{% endblock content %}
