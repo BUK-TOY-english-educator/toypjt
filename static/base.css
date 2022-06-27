@@ -34,7 +34,11 @@
 
 .theme-btn {
   background-color:#EAA0A2;
-  width:200px;
+  color:white;
+  border-radius:0.5rem;
+  padding-left:1rem;
+  padding-right:1rem;
+  margin:0 0.5rem;
 }
 
 /* 테마 글꼴
