@@ -1,4 +1,5 @@
-import requests
+import requests, json
+from django.http import JsonResponse
 from django.conf import settings
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.views.decorators.http import require_http_methods, require_POST, require_safe
@@ -120,3 +121,44 @@ def youtube(request):
 
     # print(response_dict['items'][0])
     return render(request, 'lectures/youtube.html', context)
+
+# 사전 api view
+# https://developer.oxforddictionaries.com/
+def find_word(request, word):   
+    # ToDo: replace with your own app_id and app_key
+    # api parameter
+    app_id = '81e0600d'
+    app_key = 'd702b292b062920dc24252a551252a5b'
+    language = 'en-gb'
+    word_id = word  # 검색할 단어
+    
+    print(word)
+    # url, requests
+    url = 'https://od-api.oxforddictionaries.com/api/v2/entries/'  + language + '/'  + word_id.lower()
+    print(url)
+    r = requests.get(url, headers = {'app_id' : app_id, 'app_key' : app_key})
+    print("code {}\n".format(r.status_code))
+    result = r.json()
+    senses = result["results"][0]["lexicalEntries"][0]['entries'][0]['senses'][0]
+    # print(result)
+    #print(senses)   
+    # 정의
+    word_definition = senses['definitions'][0]
+    # 예문
+    try:
+        word_example = senses['examples'][0]['text']
+    except:
+        word_example = '예문이 없어요..'    
+    # 문장 성분
+    lexical_category = result["results"][0]["lexicalEntries"][0]["lexicalCategory"]["text"]
+
+    #print(word_definition, word_example, lexical_category)
+
+    data = {
+        # 'youtube_items': response_dict['items'],
+        'word_definition': word_definition,
+        'word_example': word_example,
+        'lexical_category': lexical_category,
+    }
+
+    return JsonResponse(data)    

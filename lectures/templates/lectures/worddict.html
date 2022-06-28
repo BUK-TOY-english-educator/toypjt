@@ -1,0 +1,69 @@
+<div>  
+  <input type="text" id ="word-input" placeholder="단어를 입력하세요">
+  <button id="word-button">검색</button>
+  <div class="word-result-container">
+    <h3 id="word-title"></h3>
+    <p id="word-definition" class="word-result"></p>
+    <p id="word-example" class="word-result"></p>
+    <p id="lexical-category" class="word-result"></p>
+  </div>
+</div>
+
+<style>
+  .word-result {
+    color: black;
+  }
+
+  .word-result-container {
+    margin-top: 20px;
+  }
+</style>
+
+<script>
+  const wordButton = document.getElementById('word-button')
+  const wordInput = document.getElementById('word-input');
+  const wordTitle = document.getElementById('word-title');
+  const wordDefinition = document.getElementById('word-definition');
+  const wordExample = document.getElementById('word-example');
+  const wordCategory = document.getElementById('lexical-category');
+  
+
+  // 장고 백 url
+  const apiURL = '/lectures/findword';  
+
+  // Search by word(term)
+  async function searchWord(term) {
+    const res = await fetch(`${apiURL}/${term}/`);
+    const data = await res.json();
+
+    //console.log(data);
+    const definition = data['word_definition'];
+    const example = data['word_example'];
+    const category = data['lexical_category'];
+    
+    showWord(term, definition, example, category);
+    //showData(data);
+  }
+
+  function showWord(term, definition, example, category) {
+    console.log(definition, example, category);
+    wordDefinition.innerText = '정의: '+ definition;
+    wordExample.innerText = '예문: '+ example;
+    wordCategory.innerText = '문장성분: '+ category;
+    wordTitle.innerText = term;
+  }
+
+  // word-input Event listener
+  wordButton.addEventListener('click', e => {
+    e.preventDefault();
+
+    // input form 안의 text -> word
+    const word = wordInput.value.trim();
+    
+    if(!word) {
+      alert('입력해라..')
+    } else {
+      searchWord(word);
+    }
+  })
+</script>

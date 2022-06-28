@@ -12,4 +12,5 @@ urlpatterns = [
     path('<int:video_pk>/study/', views.study),
     path('<int:video_pk>/writing/', views.writing),
     path('<int:video_pk>/speaking/', views.speaking),
+    path('findword/<str:word>/', views.find_word, name='find_word'),
 ]

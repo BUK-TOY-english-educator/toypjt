@@ -25,6 +25,20 @@
       font-size: 20px;
       padding: 5px 15px;      
     }    
+    .youtube-flex {
+      display: flex;      
+      height: 50%;
+    }
+    .caption-container {
+      margin-top: 20px;
+      margin-left: 10px;
+    }
+    .dict-container {
+      width: 30%;
+      margin-left: 10%;
+      border: 2px dashed black;
+      padding: 10px;
+    }
   </style>
 {% endblock style %}
 {% block content %}
@@ -32,14 +46,27 @@
 <h3 id="time_min"></h3><h3 id="time_sec"></h3>
 <body>  
   <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-  <div id="player"></div>
-  <div class="mb-3">
-    <button id="bigger-text" class="font-btn">글씨 키우기</button> <button id="smaller-text" class="font-btn">글씨 줄이기</button>
-  </div>
-  <p id="display_caption_0" class="top-caption-p">{{text_lst.3}}</p>
-  <p id="display_caption_1">{{text_lst.2}}</p>
-  <p id="display_caption_2">{{text_lst.1}}</p>
-  <p id="display_caption_3">{{text_lst.0}}</p>  
+    <div class="youtube-flex">
+      <div id="player"></div>
+      <div class="dict-container">
+        <h2>단어 검색</h2>
+        {% include './worddict.html' %}
+      </div>
+    </div>
+    
+    <div class="caption-container">
+      <div class="mb-3">
+        <button id="bigger-text" class="font-btn">글씨 키우기</button> <button id="smaller-text" class="font-btn">글씨 줄이기</button>
+      </div>
+      <p id="display_caption_0" class="top-caption-p">{{text_lst.3}}</p>
+      <p id="display_caption_1">{{text_lst.2}}</p>
+      <p id="display_caption_2">{{text_lst.1}}</p>
+      <p id="display_caption_3">{{text_lst.0}}</p>
+    </div>      
+    
+  
+
+  {% comment %}script부분입니다.  {% endcomment %}
   <script>
     // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
@@ -85,7 +112,7 @@
           // console.log("{{ text_lst.captionIdx}}")
           // console.log(player.getCurrentTime())
           const nowTime = player.getCurrentTime()      
-          console.log(nowTime)
+          //console.log(nowTime)
           if (nowTime > timeLst[captionIdx]){
             while (nowTime > timeLst[captionIdx]){            
               captionIdx++;
@@ -95,7 +122,7 @@
               captionIdx--;
             }
           }
-          console.log(textLst[captionIdx-1]);
+          //console.log(textLst[captionIdx-1]);
           // console.log(captionIdx)
           let mins = Math.floor(player.getCurrentTime()/60);
           let secs = Math.floor(player.getCurrentTime()%60);
