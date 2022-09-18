@@ -50,6 +50,8 @@
       <div id="player"></div>
       <div class="dict-container">
         <h2>단어 검색</h2>
+        {% comment %} <p>드래그한 단어</p> {% endcomment %}
+        {% comment %} <p id="seletecd_word">{{testText}}</p> {% endcomment %}
         {% include './worddict.html' %}
       </div>
     </div>
@@ -72,14 +74,15 @@
     var tag = document.createElement('script');
     let display_time_min = document.getElementById('time_min');
     let display_time_sec = document.getElementById('time_sec');
-    let displayCaption0 = document.getElementById("display_caption_0")
-    let displayCaption1 = document.getElementById("display_caption_1")
-    let displayCaption2 = document.getElementById("display_caption_2")
-    let displayCaption3 = document.getElementById("display_caption_3")
+    let displayCaption0 = document.getElementById("display_caption_0");
+    let displayCaption1 = document.getElementById("display_caption_1");
+    let displayCaption2 = document.getElementById("display_caption_2");
+    let displayCaption3 = document.getElementById("display_caption_3");
     // 글자버튼
-    let biggerTextBtn = document.getElementById("bigger-text")
-    let smallerTextBtn = document.getElementById("smaller-text")
-    let textSizeLevel = 1 // 초기화
+    let biggerTextBtn = document.getElementById("bigger-text");
+    let smallerTextBtn = document.getElementById("smaller-text");
+    let textSizeLevel = 1; // 초기화
+    //let selectedWord = document.getElementById("seletecd_word");
 
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -105,14 +108,20 @@
       event.target.playVideo();
       let captionIdx = 1;
       const textLst = {{text_lst|safe}}
-      const timeLst = {{time_lst|safe}}
+      const timeLst = {{time_lst|safe}}    
+      let = beforeTime = -2.5555 // nowTime이랑 기존 타임이랑 비교해서 다를 때만 updateTime로직을 수행하도록 하기 위해서
       function updateTime() {        
+        //console.log("들어왔어요")
         if(player && player.getCurrentTime) {
           // console.log(captionIdx)    
           // console.log("{{ text_lst.captionIdx}}")
           // console.log(player.getCurrentTime())
-          const nowTime = player.getCurrentTime()      
-          //console.log(nowTime)
+          const nowTime = player.getCurrentTime() 
+          if (nowTime === beforeTime) {
+            return
+          }
+          beforeTime = nowTime             
+          console.log(nowTime)
           if (nowTime > timeLst[captionIdx]){
             while (nowTime > timeLst[captionIdx]){            
               captionIdx++;
@@ -168,6 +177,15 @@
       displayCaption2.setAttribute('class', TextSize);
       displayCaption3.setAttribute('class', TextSize);
     })
+
+    // highlight(selected text) event 등록
+    document.addEventListener('selectionchange', () => {      
+      if (window.getSelection().toString() === "") {
+        return
+      }
+      //selectedWord.innerText = window.getSelection().toString();
+      wordInput.value = window.getSelection().toString();
+    });
 
     
     

@@ -33,16 +33,23 @@
 
   // Search by word(term)
   async function searchWord(term) {
-    const res = await fetch(`${apiURL}/${term}/`);
-    const data = await res.json();
-
-    //console.log(data);
-    const definition = data['word_definition'];
-    const example = data['word_example'];
-    const category = data['lexical_category'];
+    const res = await fetch(`${apiURL}/${term}/`);    
+    let termWord = term;
+    let definition, example, category
+    if (res.status === 500) {
+      termWord = "찾는 단어가 없습니다"
+      definition = "";
+      example = "";
+      category = "";
+    } else {
+      const data = await res.json();
+      //console.log(data);
+      definition = data['word_definition'];
+      example = data['word_example'];
+      category = data['lexical_category'];
+    }
     
-    showWord(term, definition, example, category);
-    //showData(data);
+    showWord(termWord, definition, example, category);    
   }
 
   function showWord(term, definition, example, category) {

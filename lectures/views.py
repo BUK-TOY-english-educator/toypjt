@@ -118,7 +118,6 @@ def youtube(request):
         'time_lst': time_lst,
     }
     
-
     # print(response_dict['items'][0])
     return render(request, 'lectures/youtube.html', context)
 
